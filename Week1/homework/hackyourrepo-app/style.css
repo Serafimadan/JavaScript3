@@ -42,7 +42,7 @@ width: 10rem;
   
 }
 .repo-container, .contributors-container {
-    width: 50%;
+    width: calc(50% - 0.2rem);
 }
 .card {
   border-radius: 2px;
