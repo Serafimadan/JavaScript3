@@ -33,9 +33,15 @@ repoName.style.color = '#0900ed';
 const repoDescription = document.querySelector('#description');
 const repoForks = document.querySelector('#forks');
 const repoUpdated = document.querySelector('#updated');
+const contributors = document.querySelector('.contributors');
+const eachContributor = document.createElement('div');
+eachContributor.className = 'person';
+contributors.appendChild = eachContributor;
+
 // get name options for use it in select teg
 function getNameOptions() {
   placeholderRepos.forEach(repo => {
+    // create option tags and put there name value name from every object from array
     const option = document.createElement('option');
     option.textContent = repo.name;
     selectElement.appendChild(option);
