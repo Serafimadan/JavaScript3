@@ -107,33 +107,55 @@ const repoDescription = document.querySelector('#description');
 const repoForks = document.querySelector('#forks');
 const repoUpdated = document.querySelector('#updated');
 
-const eachContributor = document.createElement('div');
-eachContributor.className = 'person';
-contributorsCard.appendChild = eachContributor;
-
 // create fetchData function
 const url = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
-function fetchData() {
-  return fetch(url)
-    .then(res => {
-      return res.json();
-    })
-    .catch(() => {
-      selectElement.innerHTML = '';
-      const errorText = document.createElement('p');
-      errorText.innerText = 'Network request failed';
-      mainBlock.appendChild(errorText);
-    });
-}
 function main() {
-  fetchData(url).then(repositories => {
-    repositories.forEach(repository => {
-      const option = document.createElement('option');
-      option.innerText = repository.name;
-      option.value = repository.url;
-      selectElement.appendChild(option);
-    });
+  function fetchData() {
+    return fetch(url)
+      .then(res => {
+        return res.json();
+      })
+      .then(repositories => {
+        // sort array names in select by alphabet
+        repositories.sort((a, b) => {
+          const aname = a.name.toLowerCase();
+          const bname = b.name.toLowerCase();
+          if (aname < bname) return -1;
+          if (aname > bname) return 1;
+        });
+        repositories.forEach(repository => {
+          // get names for options in the select
+          const option = document.createElement('option');
+          option.innerText = repository.name;
+          selectElement.appendChild(option);
+          // get information about repository
+          if (selectElement.value === repository.name) {
+            aElem.textContent = repository.name;
+            repoDescription.textContent = repository.description;
+            repoForks.textContent = repository.forks;
+            repoUpdated.textContent = repository.updated_at;
+          }
+        });
+      })
+      .catch(() => {
+        selectElement.innerHTML = '';
+        secondSection.style.display = 'none';
+        thirdSection.style.display = 'none';
+        mainBlock.style.backgroundColor = '#f8d7d9';
+        mainBlock.style.padding = '1.2rem';
+        mainBlock.style.marginTop = '0.2rem';
+        const errorText = document.createElement('p');
+        errorText.style.color = '#803438';
+        errorText.innerText = 'Network request failed';
+        mainBlock.appendChild(errorText);
+      });
+  }
+
+  fetchData(url);
+
+  selectElement.addEventListener('change', () => {
+    fetchData('https://api.github.com/orgs/HackYourFuture/repos?per_page=100');
   });
 }
 window.onload = main();
