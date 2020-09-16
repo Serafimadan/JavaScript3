@@ -87,11 +87,11 @@ const contributorsCard = document.createElement('div');
 contributorsCard.classList = 'card contributors';
 thirdSection.appendChild(contributorsCard);
 const photo = document.createElement('img');
-photo.setAttribute('alt', 'pic');
+//photo.setAttribute('alt', 'pic');
 contributorsCard.appendChild(photo);
 const contribName = document.createElement('a');
 contribName.className = 'name';
-contribName.textContent = 'Name';
+// contribName.textContent = 'Name';
 contribName.style.color = '#0900ed';
 contributorsCard.appendChild(contribName);
 const badge = document.createElement('div');
@@ -112,29 +112,39 @@ const url = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
 function main() {
   function fetchData() {
-    return fetch(url)
+    fetch(url)
       .then(res => {
         return res.json();
       })
-      .then(repositories => {
+      .then(repositoriesList => {
+        console.log(repositoriesList);
         // sort array names in select by alphabet
-        repositories.sort((a, b) => {
-          const aname = a.name.toLowerCase();
-          const bname = b.name.toLowerCase();
-          if (aname < bname) return -1;
-          if (aname > bname) return 1;
+        repositoriesList.sort((a, b) => {
+          const fistName = a.name.toLowerCase();
+          const nextName = b.name.toLowerCase();
+          if (fistName < nextName) return -1;
+          if (fistName > nextName) return 1;
         });
-        repositories.forEach(repository => {
-          // get names for options in the select
+        repositoriesList.forEach(repository => {
+          console.log(repository);
+          // getting names for options in the select
           const option = document.createElement('option');
           option.innerText = repository.name;
           selectElement.appendChild(option);
-          // get information about repository
+          // getting information about repository
           if (selectElement.value === repository.name) {
             aElem.textContent = repository.name;
             repoDescription.textContent = repository.description;
             repoForks.textContent = repository.forks;
             repoUpdated.textContent = repository.updated_at;
+            // get information about contributors
+            const contributionUrl = repository.contributors_url;
+            fetch(contributionUrl).then(data => {
+              console.log(contributionUrl);
+              photo.src = data.avatar_url;
+              contribName.textContent = data.login;
+              badge.textContent = data.contributions;
+            });
           }
         });
       })
@@ -151,9 +161,8 @@ function main() {
         mainBlock.appendChild(errorText);
       });
   }
-
+  
   fetchData(url);
-
   selectElement.addEventListener('change', () => {
     fetchData('https://api.github.com/orgs/HackYourFuture/repos?per_page=100');
   });
