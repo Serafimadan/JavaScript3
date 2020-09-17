@@ -79,15 +79,19 @@ informationList4.appendChild(listElem8);
 const thirdSection = document.createElement('section');
 thirdSection.className = 'contributors-container';
 mainBlock.appendChild(thirdSection);
-const contribTitle = document.createElement('p');
+const contribTitle = document.createElement('div');
 contribTitle.textContent = 'Contributors';
 contribTitle.classList = 'card contributor-title';
 thirdSection.appendChild(contribTitle);
+const containerContributor = document.createElement('div');
+containerContributor.className = 'container';
+thirdSection.appendChild(containerContributor);
 const contributorsCard = document.createElement('div');
 contributorsCard.classList = 'card contributors';
-thirdSection.appendChild(contributorsCard);
+containerContributor.appendChild(contributorsCard);
 const photo = document.createElement('img');
-//photo.setAttribute('alt', 'pic');
+photo.className = 'contribPict';
+// photo.setAttribute('alt', 'pic');
 contributorsCard.appendChild(photo);
 const contribName = document.createElement('a');
 contribName.className = 'name';
@@ -126,7 +130,6 @@ function main() {
           if (fistName > nextName) return 1;
         });
         repositoriesList.forEach(repository => {
-          console.log(repository);
           // getting names for options in the select
           const option = document.createElement('option');
           option.innerText = repository.name;
@@ -139,12 +142,23 @@ function main() {
             repoUpdated.textContent = repository.updated_at;
             // get information about contributors
             const contributionUrl = repository.contributors_url;
-            fetch(contributionUrl).then(data => {
-              console.log(contributionUrl);
-              photo.src = data.avatar_url;
-              contribName.textContent = data.login;
-              badge.textContent = data.contributions;
-            });
+            fetch(contributionUrl)
+              .then(res => {
+                return res.json();
+              })
+              .then(data => {
+                console.log(data);
+                let cardElement = '';
+                data.forEach(contributor => {
+                  cardElement += `<div class='card person'><img src= ${contributor.avatar_url} alt = ${contributor.login} class="contribPict"/> <a class='name'>${contributor.login}</a> <div class='badge'>${contributor.contributions}</div></div>`;
+                  // photo.src = contributor.avatar_url;
+                  // photo.setAttribute('alt', `${contributor.login}`);
+                  // contribName.innerText = contributor.login;
+                  // badge.innerText = contributor.contributions;
+                  // console.log(contributor.login);
+                });
+                containerContributor.innerHTML = cardElement;
+              });
           }
         });
       })
@@ -161,7 +175,7 @@ function main() {
         mainBlock.appendChild(errorText);
       });
   }
-  
+
   fetchData(url);
   selectElement.addEventListener('change', () => {
     fetchData('https://api.github.com/orgs/HackYourFuture/repos?per_page=100');
