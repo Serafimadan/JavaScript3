@@ -115,6 +115,12 @@ const repoUpdated = document.querySelector('#updated');
 const url = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
 function main() {
+  //   const getContribInfo = (contributors) => {
+  // photo.src = contributors.avatar_url;
+  // contribName.innerText = contributors.login;
+  // badge.innerText = contributors.contributions;
+  // console.log(contributors.login);
+  //   }
   function fetchData() {
     fetch(url)
       .then(res => {
@@ -150,7 +156,6 @@ function main() {
                 //console.log(data);
                 let cardElement = '';
                 data.forEach(contributor => {
-                  getContribInfo(contributor);
                   cardElement += `<div class='card person'><img src= ${contributor.avatar_url} alt = ${contributor.login} class="contribPict"/> <a class='name'>${contributor.login}</a> <div class='badge'>${contributor.contributions}</div></div>`;
                 });
                 containerContributor.innerHTML = cardElement;
