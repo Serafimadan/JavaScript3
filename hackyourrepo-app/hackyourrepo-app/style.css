@@ -74,6 +74,7 @@ ul>li:first-child {
 }
 a {
   cursor: pointer;
+  color: #0900ed;
 }
 .contributors {
   display: block;
