@@ -105,7 +105,7 @@ contributorsCard.appendChild(badge);
 const repoName = document.querySelector('#repository');
 const aElem = document.createElement('a');
 repoName.appendChild(aElem);
-repoName.style.color = '#0900ed';
+// repoName.style.color = '#0900ed';
 
 const repoDescription = document.querySelector('#description');
 const repoForks = document.querySelector('#forks');
@@ -115,12 +115,6 @@ const repoUpdated = document.querySelector('#updated');
 const url = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 
 function main() {
-  const getContribInfo = (contributors) => {
-photo.src = contributors.avatar_url;
-contribName.innerText = contributors.login;
-badge.innerText = contributors.contributions;
-console.log(contributors.login);
-  }
   function fetchData() {
     fetch(url)
       .then(res => {
