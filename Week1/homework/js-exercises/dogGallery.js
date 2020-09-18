@@ -113,7 +113,7 @@ function createRamdomImgLiXml(myRandomImg) {
   li.appendChild(myImageXml);
 }
 // another method request
-const url = 'https://dog.ceo/api/breeds/image/random1';
+const url = 'https://dog.ceo/api/breeds/image/random';
 function getDogImgXMLHttp() {
   const xhr = new XMLHttpRequest();
   xhr.responseType = 'json';
