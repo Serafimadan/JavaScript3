@@ -1,0 +1,117 @@
+/* 
+  Write here your CSS rules for HackYourRepo!
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.block-for-line {
+  margin: 0 auto;
+  border-top: 1px solid black;
+}
+.header-elements {
+  display: flex;
+  background-color: #4051b5;
+  color: #ffffff;
+  padding: 1.2rem;
+  box-shadow: 1px 3px 10px 1px rgb(11 10 14 / 50%);
+  width: 90%;
+  margin: 0 auto;
+}
+.title {
+  margin-right: 20px;
+}
+select#menu {
+  padding: 0 15px;
+  border: none;
+  border: 1px solid #3f51b5;
+  outline-color: #3f51b5;
+  font: inherit;
+  margin-left: 1.5rem;
+  width: 10rem;
+}
+.main-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  
+}
+.repo-container, .contributors-container {
+  width: calc(50% - 0.2rem);
+}
+.card {
+  border-radius: 2px;
+  line-height: 1.6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin: 0.2rem;
+  padding: 1rem;
+}
+.repository-elem {
+  background-color: #ffffff;
+  height: auto;
+  display: flex;
+  font-size: 1.1rem;
+  padding-bottom: 5px;
+}
+.contributor-title {
+  color: darkgray;
+  margin-bottom: 0;
+  box-shadow: none;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: none;
+}
+li {
+  list-style-type: none;
+}
+ul>li:first-child {
+  margin-right: 10px;
+  font-weight: bold;
+}
+a {
+  cursor: pointer;
+  color: #0900ed;
+}
+.contributors {
+  display: block;
+  align-items: center;
+}
+.person {
+  display: flex;
+}
+.name {
+  text-decoration: none;
+  font-size: 2vmin;
+  margin-left: 1rem;
+}
+.badge {
+  margin-left: auto;
+  background: darkgrey;
+  color: white;
+  padding: 0.1rem 0.8rem;
+  border-radius: 5px;
+}
+.contribPict {
+  width: 50px;
+}
+/* @media */
+@media (max-width: 768px) { 
+  .main-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .repo-container {
+    width: 100%;
+  }
+  .contributors-container {
+    width: 100%;
+  }
+}
+@media (max-width: 370px) {
+  .header-elements {
+    width: 100%;
+  }
+}
