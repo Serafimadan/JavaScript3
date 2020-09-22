@@ -8,22 +8,8 @@ class LivingBeing {
     this.job = job;
   }
 }
-// children class 
-class Animal extends LivingBeing {
-  constructor(name, age, color, feed, job, kindOfAnimal) {
-    super(name, age, job);
-    this.color = color;
-    this.feed = feed;
-    this.kindOfAnimal = kindOfAnimal;
-  }
 
-  tellHorseStory(masterName) {
-    console.log(`${masterName} has a ${this.kindOfAnimal}, named ${this.name}.
-    The horse is ${this.age} years old and has the color ${this.color}. Usually the horse eats ${this.feed} or ${this.job} for Abdulkareem.
-And they lived happily ever after!`);
-  }
-}
-// children class
+// children class for man
 class Human extends LivingBeing {
   constructor(
     name,
@@ -44,13 +30,28 @@ class Human extends LivingBeing {
   }
 
   getManStory() {
-    console.log(`${this.name} is a ${this.age} year old ${this.gender}, that lives in ${this.livingPlace}. He has a ${this.familyMembers.member} and ${this.familyMembers.children} children. 
+    console.log(`${this.name} is a ${this.age} year old ${this.gender}, that lives in ${this.livingPlace}. He has a ${this.familyMembers.spouse} and ${this.familyMembers.children} children. 
 As a day job he's a ${this.job}, that makes houses. He likes to ${this.favouriteActivities}.`);
     this.animal.tellHorseStory(this.name);
   }
 }
+// children class for horse
+class Animal extends LivingBeing {
+  constructor(name, age, color, feed, job, kindOfAnimal) {
+    super(name, age, job);
+    this.color = color;
+    this.feed = feed;
+    this.kindOfAnimal = kindOfAnimal;
+  }
 
-const horse = new Animal(
+  tellHorseStory(masterName) {
+    console.log(`${masterName} has a ${this.kindOfAnimal}, named ${this.name}.
+The horse is ${this.age} years old and has the color ${this.color}. Usually the horse eats ${this.feed} or ${this.job} for Abdulkareem.
+And they lived happily ever after!`);
+  }
+}
+// objects for
+const Adel = new Animal(
   'Adel',
   15,
   'brown',
@@ -59,14 +60,14 @@ const horse = new Animal(
   'horse',
 );
 
-const man = new Human(
+const Abdulkareem = new Human(
   'Abdulkareem',
   38,
   'man',
   'Riyadh',
-  { member: 'wife', children: 3 },
+  { spouse: 'wife', children: 3 },
   'construction worker',
   'eat dates and smoke water pipe',
-  horse,
+  Adel,
 );
-man.getManStory();
+Abdulkareem.getManStory();

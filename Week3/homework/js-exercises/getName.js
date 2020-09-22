@@ -12,15 +12,29 @@
 
 async function getData() {
   let fetchedData;
+  let json;
   try {
     fetchedData = await fetch('https://randomfox.ca/floof/');
+    json = await fetchedData.json();
+    return json;
   } catch (err) {
     console.log('Oops, something went wrong!', err);
   }
-  return fetchedData.json;
+  return json;
 }
 getData();
+// another way to make a async
+// async function getData(url) {
+//   try {
+//     const response = await fetch(url);
+//     const json = await response.json();
+//   } catch (err) {
+//     console.log('Oops, something went wrong!', err);
+//   }
+// }
+// getData('https://randomfox.ca/floof/');
 
+// Exercise B
 // const arrayOfWords = ['cucumber', 'tomatos', 'avocado'];
 
 // const makeAllCaps = array => {
