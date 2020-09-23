@@ -117,9 +117,7 @@ const url = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
 function main() {
   function fetchData() {
     fetch(url)
-      .then(res => {
-        return res.json();
-      })
+      .then(res => res.json())
       .then(repositoriesList => {
         console.log(repositoriesList);
         // sort array names in select by alphabet
@@ -157,16 +155,12 @@ function main() {
         });
       })
       .catch(() => {
-        selectElement.innerHTML = '';
         secondSection.style.display = 'none';
         thirdSection.style.display = 'none';
         mainBlock.style.backgroundColor = '#f8d7d9';
         mainBlock.style.padding = '1.2rem';
         mainBlock.style.marginTop = '0.2rem';
-        const errorText = document.createElement('p');
-        errorText.style.color = '#803438';
-        errorText.innerText = 'Network request failed';
-        mainBlock.appendChild(errorText);
+        mainBlock.innerHTML = `<div class="error-message">Network request failed</div>`;
       });
   }
 

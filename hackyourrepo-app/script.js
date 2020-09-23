@@ -1,5 +1,6 @@
-"use strict";
+'use strict';
 
 /*
   Write here your JavaScript for HackYourRepo!
 */
+

@@ -97,6 +97,9 @@ a {
 .contribPict {
   width: 50px;
 }
+.error-message {
+  color: #803438;
+}
 /* @media */
 @media (max-width: 768px) { 
   .main-container {
