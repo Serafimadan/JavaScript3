@@ -110,6 +110,7 @@ repoName.appendChild(aElem);
 const paginationList = document.createElement('ul');
 paginationList.className = 'pagination';
 thirdSection.appendChild(paginationList);
+
 const repoDescription = document.querySelector('#description');
 const repoForks = document.querySelector('#forks');
 const repoUpdated = document.querySelector('#updated');

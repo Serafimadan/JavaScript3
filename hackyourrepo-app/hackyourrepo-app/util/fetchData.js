@@ -1,4 +1,5 @@
 'use strict';
+
 import {
   selectElement,
   aElem,
@@ -10,6 +11,7 @@ import {
   mainBlock,
   containerContributor,
 } from './domElem.js';
+import { pagination } from './pagination.js';
 
 // eslint-disable-next-line import/prefer-default-export
 export function fetchData() {
@@ -42,17 +44,21 @@ export function fetchData() {
               return res.json();
             })
             .then(data => {
+              const pageData = pagination(data, 1);
+              // console.log(data);
               let cardElement = '';
-              data.forEach(contributor => {
+              pageData.forEach(contributor => {
+                // console.log(contributor);
                 cardElement += `<div class='card person'>
                   <img src= ${contributor.avatar_url} alt = ${contributor.login} class="contribPict"/> 
                   <a class='name'>${contributor.login}</a> 
                   <div class='badge'>${contributor.contributions}</div>
                   </div>`;
-                // let notesOnPage = 5;
-                // let countOfItems = Math.ceil(contributor.length / notesOnPage);
               });
+              // pagination
               containerContributor.innerHTML = cardElement;
+              for (let i = 1; i <= Math.ceil(data.length / 5); i++)
+                console.log(`Selected page ${i}:`, pagination(data, 1));
             });
         }
       });
