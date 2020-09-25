@@ -107,7 +107,7 @@ const aElem = document.createElement('a');
 repoName.appendChild(aElem);
 // repoName.style.color = '#0900ed';
 
-const paginationList = document.createElement('ul');
+const paginationList = document.createElement('div');
 paginationList.className = 'pagination';
 thirdSection.appendChild(paginationList);
 
@@ -144,10 +144,10 @@ export {
   badge,
   repoName,
   aElem,
-  paginationList,
   selectElement,
   url,
   repoForks,
   repoDescription,
   repoUpdated,
+  paginationList,
 };

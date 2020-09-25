@@ -98,7 +98,24 @@ a {
   width: 50px;
   height: 50px;
 }
+.pagination {
+  text-align: center;
+}
+button {
+  padding: 0.7rem;
+  margin: 5px;
+  font-size: 15px;
+  border: 1px solid #4051b5;
+  border-radius: 5px;
+}
+button:hover{
+  cursor: pointer;
+}
 
+button:focus, .active {
+  background: #b7bddc;
+  color: #ffffff;
+}
 /* @media */
 @media (max-width: 768px) { 
   .main-container {

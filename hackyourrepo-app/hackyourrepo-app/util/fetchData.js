@@ -6,12 +6,14 @@ import {
   repoDescription,
   repoForks,
   repoUpdated,
-  secondSection,
-  thirdSection,
   mainBlock,
   containerContributor,
+  paginationList,
 } from './domElem.js';
-import { pagination } from './pagination.js';
+import { showContributors, setupPagination } from './pagination.js';
+
+const curPage = 1;
+const rows = 5;
 
 // eslint-disable-next-line import/prefer-default-export
 export function fetchData() {
@@ -44,35 +46,15 @@ export function fetchData() {
               return res.json();
             })
             .then(data => {
-              const pageData = pagination(data, 1);
-              // console.log(data);
-              let cardElement = '';
-              pageData.forEach(contributor => {
-                // console.log(contributor);
-                cardElement += `<div class='card person'>
-                  <img src= ${contributor.avatar_url} alt = ${contributor.login} class="contribPict"/> 
-                  <a class='name'>${contributor.login}</a> 
-                  <div class='badge'>${contributor.contributions}</div>
-                  </div>`;
-              });
-              // pagination
-              containerContributor.innerHTML = cardElement;
-              for (let i = 1; i <= Math.ceil(data.length / 5); i++)
-                console.log(`Selected page ${i}:`, pagination(data, 1));
+              containerContributor.innerHTML = '';
+              paginationList.innerHTML = '';
+              showContributors(data, curPage, containerContributor, rows);
+              setupPagination(data, containerContributor, rows);
             });
         }
       });
     })
     .catch(() => {
-      selectElement.innerHTML = '';
-      secondSection.style.display = 'none';
-      thirdSection.style.display = 'none';
-      mainBlock.style.backgroundColor = '#f8d7d9';
-      mainBlock.style.padding = '1.2rem';
-      mainBlock.style.marginTop = '0.2rem';
-      const errorText = document.createElement('p');
-      errorText.style.color = '#803438';
-      errorText.innerText = 'Network request failed';
-      mainBlock.appendChild(errorText);
+      mainBlock.innerHTML = `<div class="error-message">Network request failed</div>`;
     });
 }
