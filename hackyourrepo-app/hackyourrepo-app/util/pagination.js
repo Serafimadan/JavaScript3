@@ -27,7 +27,7 @@ function createPageButton(page, items, container, rowsPerPage) {
 
   if (curPage === page) button.classList.add('active');
 
-  button.addEventListener('click', function() {
+  button.addEventListener('click', () => {
     container.innerHTML = '';
     showContributors(items, page, container, rowsPerPage);
     const currentBtn = document.querySelector('.pagination  button.active');
