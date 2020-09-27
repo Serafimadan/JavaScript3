@@ -24,6 +24,6 @@ h1, p, .list {
   display: none;
 }
 .question-text:hover {
-    background: #c3c3c3;
-    cursor: pointer;
+  background: #c3c3c3;
+  cursor: pointer;
 }

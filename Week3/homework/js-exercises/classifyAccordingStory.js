@@ -18,6 +18,7 @@ class Human extends LivingBeing {
     livingPlace,
     familyMembers,
     job,
+    typeOfJob,
     favouriteActivities,
     animal,
   ) {
@@ -25,14 +26,15 @@ class Human extends LivingBeing {
     this.gender = gender;
     this.livingPlace = livingPlace;
     this.familyMembers = familyMembers;
+    this.typeOfJob = typeOfJob;
     this.favouriteActivities = favouriteActivities;
     this.animal = animal;
   }
 
-  getManStory() {
+  getWholeStory() {
     console.log(`${this.name} is a ${this.age} year old ${this.gender}, that lives in ${this.livingPlace}. He has a ${this.familyMembers.spouse} and ${this.familyMembers.children} children. 
-As a day job he's a ${this.job}, that makes houses. He likes to ${this.favouriteActivities}.`);
-    this.animal.tellHorseStory(this.name);
+As a day job he's a ${this.job}, that ${this.typeOfJob}. He likes to ${this.favouriteActivities}.`);
+    this.animal.tellStory(this.name);
   }
 }
 // children class for horse
@@ -44,7 +46,7 @@ class Animal extends LivingBeing {
     this.kindOfAnimal = kindOfAnimal;
   }
 
-  tellHorseStory(masterName) {
+  tellStory(masterName) {
     console.log(`${masterName} has a ${this.kindOfAnimal}, named ${this.name}.
 The horse is ${this.age} years old and has the color ${this.color}. Usually the horse eats ${this.feed} or ${this.job} for Abdulkareem.
 And they lived happily ever after!`);
@@ -67,7 +69,8 @@ const Abdulkareem = new Human(
   'Riyadh',
   { spouse: 'wife', children: 3 },
   'construction worker',
+  'makes houses',
   'eat dates and smoke water pipe',
   Adel,
 );
-Abdulkareem.getManStory();
+Abdulkareem.getWholeStory();

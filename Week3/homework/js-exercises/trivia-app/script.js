@@ -21,18 +21,19 @@ listQuestions.className = 'list';
 mainContainer.append(pageTitle, description, wrapForQuestion);
 wrapForQuestion.appendChild(listQuestions);
 // decoding HTML entities
+/**
+ * Decodes HTML entities.
+ *
+ * @param {string} data
+ * @returns {string}
+ *
+ * @link https://gomakethings.com/decoding-html-entities-with-vanilla-javascript/
+ */
+
 function decodingHtmlElem(data) {
   const content = document.createElement('textarea');
   content.innerHTML = data;
   return content.value;
-}
-// decoding HTML entities
-function htmlEntities(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
 }
 // get questions and answers
 async function getRandomQuestions(url) {
@@ -48,7 +49,7 @@ async function getRandomQuestions(url) {
       listQuestions.appendChild(li);
       const textQuestion = document.createElement('div');
       textQuestion.className = 'question-text';
-      textQuestion.textContent = htmlEntities(element.question);
+      textQuestion.textContent = decodingHtmlElem(element.question);
       const answer = document.createElement('div');
       answer.className = 'right-answer';
       answer.textContent = decodingHtmlElem(element.correct_answer);
